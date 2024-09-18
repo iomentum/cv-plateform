@@ -197,9 +197,9 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "file",
+									"key": "resume",
 									"type": "file",
-									"src": "/path/to/your/resume.pdf"
+									"src": "/C:/Users/yanne/Downloads/CV Bonaudo Yann.pdf"
 								}
 							]
 						},
@@ -293,10 +293,32 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:3000"
+			"value": "http://localhost:3001"
 		},
 		{
 			"key": "token",

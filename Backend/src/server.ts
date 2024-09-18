@@ -43,5 +43,5 @@ app.get('/users/:id/resumes', resumeController.getUserResumes);
 app.post('/users/:userId/resumes', upload.single('resume'), resumeController.uploadResume);
 app.get('/resumes/:id', resumeController.downloadResume);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
