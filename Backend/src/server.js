@@ -1,8 +1,17 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const usersController = require('./controllers/users');
 
 const app = express();
+
+// Configuration CORS
+app.use(cors({
+  origin: 'http://localhost:3000', // Remplacez ceci par l'URL de votre front-end
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 
 app.use(express.json());
 
