@@ -39,9 +39,10 @@ app.get('/users', authenticateToken, userController.getAllUsers);
 app.get('/users/:id', authenticateToken, userController.getUser);
 app.put('/users/:id', authenticateToken, userController.updateUser);
 app.delete('/users/:id', authenticateToken, userController.deleteUser);
-app.get('/users/:id/resumes', resumeController.getUserResumes);
-app.post('/users/:userId/resumes', upload.single('resume'), resumeController.uploadResume);
-app.get('/resumes/:id', resumeController.downloadResume);
+app.get('/users/:id/resumes', authenticateToken, resumeController.getUserResumes);
+app.post('/users/:userId/resumes', authenticateToken, upload.single('resume'), resumeController.uploadResume);
+app.get('/resumes/:id', authenticateToken, resumeController.downloadResume);
+app.delete('/resumes/:id', authenticateToken, resumeController.deleteResume);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
