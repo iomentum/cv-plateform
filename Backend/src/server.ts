@@ -1,8 +1,9 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
 import { userController } from './controllers/users';
-
+import { resumeController } from './controllers/resumes';
 const app: Express = express();
 
 app.use(cors({
@@ -30,12 +31,17 @@ const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) 
   });
 };
 
+const upload = multer({ dest: 'uploads/' });
+
 app.post('/register', userController.register);
 app.post('/login', userController.login);
 app.get('/users', authenticateToken, userController.getAllUsers);
 app.get('/users/:id', authenticateToken, userController.getUser);
 app.put('/users/:id', authenticateToken, userController.updateUser);
 app.delete('/users/:id', authenticateToken, userController.deleteUser);
+app.get('/users/:id/resumes', resumeController.getUserResumes);
+app.post('/users/:userId/resumes', upload.single('resume'), resumeController.uploadResume);
+app.get('/resumes/:id', resumeController.downloadResume);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
