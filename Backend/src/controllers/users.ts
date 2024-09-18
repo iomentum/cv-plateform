@@ -8,10 +8,11 @@ const prisma = new PrismaClient();
 export const userController = {
   register: async (req: Request, res: Response) => {
     try {
-      const { email, password, name } = req.body;
+      const { email, password, name, surname, city, phoneNumber, domain } = req.body;
+      const profilePicture = req.file ? req.file.path : null;
 
-      if (!email || !password) {
-        return res.status(400).json({ error: 'Email and password are required' });
+      if (!email || !password || !name || !surname || !city || !phoneNumber || !domain) {
+        return res.status(400).json({ error: 'Missing required fields' });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,6 +21,11 @@ export const userController = {
           email,
           password: hashedPassword,
           name,
+          surname,
+          city,
+          phoneNumber,
+          profilePicture,
+          domain
         },
       });
       res.status(201).json({ userId: user.id, message: 'User created successfully' });
@@ -33,7 +39,7 @@ export const userController = {
       res.status(500).json({ error: 'An unexpected error occurred during registration' });
     }
   },
-
+  
   login: async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
@@ -93,15 +99,26 @@ export const userController = {
   updateUser: async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { email, name } = req.body;
+      const { email, name, surname, city, phoneNumber, description, domain } = req.body;
+      const profilePicture = req.file ? req.file.path : undefined;
 
-      if (!email && !name) {
-        return res.status(400).json({ error: 'At least one field (email or name) must be provided for update' });
+      const updateData: any = { 
+        email, 
+        name, 
+        surname, 
+        city, 
+        phoneNumber, 
+        description, 
+        domain 
+      };
+
+      if (profilePicture) {
+        updateData.profilePicture = profilePicture;
       }
 
       const user = await prisma.user.update({
         where: { id: parseInt(id) },
-        data: { email, name },
+        data: updateData,
       });
       res.json({ user, message: 'User updated successfully' });
     } catch (error) {

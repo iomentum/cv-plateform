@@ -1,4 +1,5 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
+import path from 'path';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
@@ -11,7 +12,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use(express.json());
 
 interface AuthRequest extends Request {
@@ -33,11 +34,11 @@ const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) 
 
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/register', userController.register);
+app.post('/register', upload.single('profilePicture'), userController.register);
 app.post('/login', userController.login);
 app.get('/users', authenticateToken, userController.getAllUsers);
 app.get('/users/:id', authenticateToken, userController.getUser);
-app.put('/users/:id', authenticateToken, userController.updateUser);
+app.put('/users/:id', authenticateToken, upload.single('profilePicture'), userController.updateUser);
 app.delete('/users/:id', authenticateToken, userController.deleteUser);
 app.get('/users/:id/resumes', authenticateToken, resumeController.getUserResumes);
 app.post('/users/:userId/resumes', authenticateToken, upload.single('resume'), resumeController.uploadResume);

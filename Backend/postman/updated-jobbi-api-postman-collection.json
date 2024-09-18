@@ -15,13 +15,49 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"Test User\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Test City",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "domain",
+									"value": "IT",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/path/to/your/profile_picture.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{base_url}}/register",
@@ -132,13 +168,44 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"updated@example.com\",\n    \"name\": \"Updated User\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "updated@example.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Updated",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Updated City",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "9876543210",
+									"type": "text"
+								},
+								{
+									"key": "domain",
+									"value": "Design",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/path/to/your/updated_profile_picture.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{base_url}}/users/1",
@@ -298,7 +365,6 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
-				"packages": {},
 				"exec": [
 					""
 				]
@@ -308,7 +374,6 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
-				"packages": {},
 				"exec": [
 					""
 				]
