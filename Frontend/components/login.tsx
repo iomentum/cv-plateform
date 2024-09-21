@@ -13,6 +13,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/api/auth";
 import { toast } from "./ui/use-toast";
+import { setAccessToken } from "@/store/acess-token";
 
 export const Login = () => {
   const form = useForm<LoginFormSchemaValues>({
@@ -20,7 +21,10 @@ export const Login = () => {
     defaultValues: loginFormDefaultValues,
   });
 
-  const { mutate, isLoading, data, reset } = useMutation(login, {
+  const { mutate } = useMutation(login, {
+    onSuccess: (result) => {
+      setAccessToken(result.data.accessToken);
+    },
     onError: () => {
       toast({
         variant: "destructive",
@@ -32,7 +36,7 @@ export const Login = () => {
   });
 
   const onSubmit = async (data: LoginFormSchemaValues) => {
-    mutate(data), console.log(data);
+    mutate(data);
   };
 
   return (
