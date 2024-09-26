@@ -1,9 +1,44 @@
-import { Login } from "../components/login";
+"use client";
+
+import { uploadResume } from "@/api/upload";
+import PersonalInfoForm from "@/components/personalInfoForm";
+import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { useMutation } from "react-query";
+export type Upload = {
+  selectedFile: File;
+  userId: string;
+};
 
 export default function Home() {
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const userId = "1";
+  const data = { selectedFile, userId };
+  const { mutate } = useMutation(uploadResume, {
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Upload failed",
+        description: "There was an error uploading the file. Please try again.",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Upload successful",
+        description: "Your resume has been uploaded successfully!",
+      });
+    },
+  });
+
+  // const onSubmit = async (data: Upload) => {
+  //   mutate(data);
+  //   console.log("data");
+  // };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-500">
-      <div>Cv Part</div>
+    <main>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100 ">
+        <PersonalInfoForm />
+      </div>
     </main>
   );
 }
