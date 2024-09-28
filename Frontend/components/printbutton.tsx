@@ -2,44 +2,42 @@
 import { FileTextIcon } from "lucide-react";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { PrintableTemplate } from "./printableTemplate";
+import { DataType, PrintableTemplate } from "./printableTemplate";
 import { Button } from "./ui/button";
+import { ColorSchemeName } from "@/utils/templatesType";
 
 type FormData = {
-  name: string;
+  selectedColor: string | null;
+  data: DataType;
 };
+
 interface RequestEvaluationDocumentButtonProps {
   values: FormData;
-  signature: string;
 }
 
-const PrintButton = ({
-  values,
-  signature,
-}: RequestEvaluationDocumentButtonProps) => {
+const PrintButton = ({ values }: RequestEvaluationDocumentButtonProps) => {
   const documentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => documentRef.current,
-    documentTitle: `YourPdfTitle-${values.name}`,
+    documentTitle: `Votre CV`,
     bodyClass: "p-16", // some padding
   });
 
   return (
-    <div>
-      <Button
-        onClick={() => {
-          handlePrint();
-        }}
-        className="py-6 flex gap-2"
-      >
-        <FileTextIcon className="size-4" /> PDF herunterladen
-      </Button>
+    <Button
+      type="submit"
+      onClick={() => {
+        handlePrint();
+      }}
+      className="px-10 w-2/12"
+    >
+      Générer le Cv
       <PrintableTemplate
+        selectedColor={values.selectedColor as ColorSchemeName}
+        data={values.data}
         ref={documentRef}
-        values={values}
-        signature={signature}
       />
-    </div>
+    </Button>
   );
 };
 

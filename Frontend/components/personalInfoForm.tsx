@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,12 +11,29 @@ import {
 } from "@/components/ui/select";
 import EducationExperienceForm from "./educationExperiencePart";
 import SkillsLanguagesInterestsForm from "./Skills";
+import { PrintButton } from "./printbutton";
+import { useStore } from "@nanostores/react";
+import { $formData, updatePersonalInfo } from "@/store/resumeForm";
+import { $selectedTemplate } from "@/store/selectedTemplate";
 
-export const PersonalInfoForm = () => {
+export const PersonalInfoForm: React.FC = () => {
+  const formData = useStore($formData);
+  const selectedTemplate = useStore($selectedTemplate);
+
+  const handlePersonalInfoChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    updatePersonalInfo({ [id]: value });
+  };
+
+  const handlePermisChange = (value: string) => {
+    updatePersonalInfo({ drivingLicenseType: value });
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Logique de soumission du formulaire
-    console.log("Formulaire soumis");
+    console.log("Formulaire soumis", formData);
   };
 
   return (
@@ -31,33 +47,59 @@ export const PersonalInfoForm = () => {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Label htmlFor="nom">Nom Complet</Label>
-            <Input id="nom" placeholder="Value" />
+            <Input
+              id="name"
+              onChange={handlePersonalInfoChange}
+              placeholder="Votre nom complet"
+            />
           </div>
           <div>
             <Label htmlFor="photo">Photo</Label>
-            <Input id="photo" placeholder="Sélectionner une photo" />
+            <Input
+              id="photo"
+              type="file"
+              onChange={handlePersonalInfoChange}
+              accept="image/*"
+            />
           </div>
           <div>
             <Label htmlFor="telephone">Numéro de téléphone</Label>
-            <Input id="telephone" placeholder="Value" />
+            <Input
+              id="telephone"
+              onChange={handlePersonalInfoChange}
+              placeholder="Votre numéro de téléphone"
+            />
           </div>
           <div>
             <Label htmlFor="email">Adresse e-mail</Label>
-            <Input id="email" placeholder="Value" />
+            <Input
+              id="email"
+              type="email"
+              onChange={handlePersonalInfoChange}
+              placeholder="Votre adresse e-mail"
+            />
           </div>
           <div>
             <Label htmlFor="naissance">Date de naissance</Label>
-            <Input id="naissance" placeholder="Value" />
+            <Input
+              id="naissance"
+              type="date"
+              onChange={handlePersonalInfoChange}
+            />
           </div>
           <div>
             <Label htmlFor="adresse">Adresse postale</Label>
-            <Input id="adresse" placeholder="Value" />
+            <Input
+              id="adresse"
+              onChange={handlePersonalInfoChange}
+              placeholder="Votre adresse postale"
+            />
           </div>
           <div>
             <Label htmlFor="permis">Type de permis obtenu (optionnel)</Label>
-            <Select>
+            <Select onValueChange={handlePermisChange}>
               <SelectTrigger>
-                <SelectValue placeholder="permis A,B,C" />
+                <SelectValue placeholder="Sélectionnez un type de permis" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="a">Permis A</SelectItem>
@@ -70,14 +112,12 @@ export const PersonalInfoForm = () => {
             <Label htmlFor="linkedin">
               Lien vers le profil LinkedIn (optionnel)
             </Label>
-            <Input id="linkedin" placeholder="Value" />
+            <Input
+              id="linkedin"
+              onChange={handlePersonalInfoChange}
+              placeholder="URL de votre profil LinkedIn"
+            />
           </div>
-        </div>
-        <div className="mt-4">
-          <Label htmlFor="presentation">
-            Paragraphe présentant vos objectifs et compétences clés
-          </Label>
-          <Textarea id="presentation" placeholder="Value" className="h-24" />
         </div>
 
         <EducationExperienceForm />
@@ -85,9 +125,12 @@ export const PersonalInfoForm = () => {
         <SkillsLanguagesInterestsForm />
       </div>
       <div className="flex justify-center">
-        <Button type="submit" className="px-8">
-          Générer le CV
-        </Button>
+        <PrintButton
+          values={{
+            data: formData,
+            selectedColor: selectedTemplate && selectedTemplate.selectedColor,
+          }}
+        />
       </div>
     </form>
   );

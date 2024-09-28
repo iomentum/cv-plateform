@@ -4,156 +4,161 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import {
+  $formData,
+  updateInterests,
+  updateLanguages,
+  updateSkills,
+} from "@/store/resumeForm";
+import { useStore } from "@nanostores/react";
 
-export const SkillsLanguagesInterestsForm = () => {
-  const [skills, setSkills] = useState([{}, {}]);
-  const [languages, setLanguages] = useState([{}, {}]);
-  const [interests, setInterests] = useState([{}, {}]);
+const SkillsLanguagesInterestsForm = () => {
+  const { skills, languages, interests } = useStore($formData);
 
-  const addSkill = () => setSkills([...skills, {}]);
-  const addLanguage = () => setLanguages([...languages, {}]);
-  const addInterest = () => setInterests([...interests, {}]);
+  const handleAddSkill = () => {
+    updateSkills([...skills, { skill: "", proficiencyLevel: 1 }]);
+  };
 
-  const removeItem = (index: number, items: any, setItems: any) => {
-    const newItems = items.filter((_: any, i: number) => i !== index);
-    setItems(newItems);
+  const handleSkillChange = (
+    index: number,
+    field: "skill" | "proficiencyLevel",
+    value: string | number
+  ) => {
+    const newSkills = skills.map((skill, i) =>
+      i === index ? { ...skill, [field]: value } : skill
+    );
+    updateSkills(newSkills);
+  };
+
+  const handleRemoveSkill = (index: number) => {
+    const newSkills = skills.filter((_, i) => i !== index);
+    updateSkills(newSkills);
+  };
+
+  const handleAddLanguage = () => {
+    updateLanguages([...languages, { language: "", proficiencyLevel: "" }]);
+  };
+
+  const handleLanguageChange = (
+    index: number,
+    field: "language" | "proficiencyLevel",
+    value: string
+  ) => {
+    const newLanguages = languages.map((lang, i) =>
+      i === index ? { ...lang, [field]: value } : lang
+    );
+    updateLanguages(newLanguages);
+  };
+
+  const handleRemoveLanguage = (index: number) => {
+    const newLanguages = languages.filter((_, i) => i !== index);
+    updateLanguages(newLanguages);
+  };
+
+  const handleAddInterest = () => {
+    updateInterests([...interests, ""]);
+  };
+
+  const handleInterestChange = (index: number, value: string) => {
+    const newInterests = interests.map((interest, i) =>
+      i === index ? value : interest
+    );
+    updateInterests(newInterests);
+  };
+
+  const handleRemoveInterest = (index: number) => {
+    const newInterests = interests.filter((_, i) => i !== index);
+    updateInterests(newInterests);
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow space-y-6">
+    <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold mb-4 pb-2 border-b">
-          Compétences
-        </h2>
+        <h3 className="text-lg font-semibold mb-2">Compétences</h3>
         {skills.map((skill, index) => (
-          <div key={index} className="mb-2 grid grid-cols-2 gap-4 items-center">
-            <div>
-              <Label
-                htmlFor={`competence-${index}`}
-                className="text-sm font-normal"
-              >
-                {index === 0 ? "Compétence" : `Compétence ${index + 1}`}
-              </Label>
-              <Input
-                id={`competence-${index}`}
-                placeholder="Value"
-                className="mt-1"
-              />
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex-grow">
-                <Label
-                  htmlFor={`niveau-${index}`}
-                  className="text-sm font-normal"
-                >
-                  {index === 0
-                    ? "Niveau de maîtrise"
-                    : `Niveau de maîtrise ${index + 1}`}
-                </Label>
-                <Input
-                  id={`niveau-${index}`}
-                  placeholder={index === 0 ? "1/5" : "5/5"}
-                  className="mt-1"
-                />
-              </div>
-              {index > 0 && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => removeItem(index, skills, setSkills)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
+          <div key={index} className="flex items-center space-x-2 mb-2">
+            <Input
+              value={skill.skill}
+              onChange={(e) =>
+                handleSkillChange(index, "skill", e.target.value)
+              }
+              placeholder="Compétence"
+            />
+            <Input
+              type="number"
+              min="1"
+              max="5"
+              value={skill.proficiencyLevel}
+              onChange={(e) =>
+                handleSkillChange(
+                  index,
+                  "proficiencyLevel",
+                  parseInt(e.target.value)
+                )
+              }
+              placeholder="Niveau (1-5)"
+            />
+            <Button
+              onClick={() => handleRemoveSkill(index)}
+              variant="ghost"
+              size="icon"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         ))}
-        <Button onClick={addSkill} variant="outline" className="mt-2 text-sm">
-          + Ajouter une compétence
-        </Button>
+        <Button onClick={handleAddSkill}>Ajouter une compétence</Button>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4 pb-2 border-b">Langues</h2>
-        {languages.map((language, index) => (
-          <div key={index} className="mb-2 grid grid-cols-2 gap-4 items-center">
-            <div>
-              <Label
-                htmlFor={`langue-${index}`}
-                className="text-sm font-normal"
-              >
-                {index === 0 ? "Langue" : `Langue ${index + 1}`}
-              </Label>
-              <Input
-                id={`langue-${index}`}
-                placeholder={index === 0 ? "Français" : "Français"}
-                className="mt-1"
-              />
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex-grow">
-                <Label
-                  htmlFor={`niveau-langue-${index}`}
-                  className="text-sm font-normal"
-                >
-                  {index === 0
-                    ? "Niveau de maîtrise"
-                    : `Niveau de maîtrise ${index + 1}`}
-                </Label>
-                <Input
-                  id={`niveau-langue-${index}`}
-                  placeholder={index === 0 ? "Maternelle" : "Maternelle"}
-                  className="mt-1"
-                />
-              </div>
-              {index > 0 && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => removeItem(index, languages, setLanguages)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
+        <h3 className="text-lg font-semibold mb-2">Langues</h3>
+        {languages.map((lang, index) => (
+          <div key={index} className="flex items-center space-x-2 mb-2">
+            <Input
+              value={lang.language}
+              onChange={(e) =>
+                handleLanguageChange(index, "language", e.target.value)
+              }
+              placeholder="Langue"
+            />
+            <Input
+              value={lang.proficiencyLevel}
+              onChange={(e) =>
+                handleLanguageChange(index, "proficiencyLevel", e.target.value)
+              }
+              placeholder="Niveau de maîtrise"
+            />
+            <Button
+              onClick={() => handleRemoveLanguage(index)}
+              variant="ghost"
+              size="icon"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         ))}
-        <Button
-          onClick={addLanguage}
-          variant="outline"
-          className="mt-2 text-sm"
-        >
-          + Ajouter une langue
-        </Button>
+        <Button onClick={handleAddLanguage}>Ajouter une langue</Button>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4 pb-2 border-b">
-          Centres d'intérêt (Optionnel)
-        </h2>
+        <h3 className="text-lg font-semibold mb-2">Centres d'intérêt</h3>
         {interests.map((interest, index) => (
-          <div key={index} className="mb-2 grid grid-cols-2 gap-4 items-center">
-            <Input placeholder="Value" className="mt-1" />
-            <div className="flex justify-end">
-              {index > 0 && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => removeItem(index, interests, setInterests)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
+          <div key={index} className="flex items-center space-x-2 mb-2">
+            <Input
+              value={interest}
+              onChange={(e) => handleInterestChange(index, e.target.value)}
+              placeholder="Centre d'intérêt"
+            />
+            <Button
+              onClick={() => handleRemoveInterest(index)}
+              variant="ghost"
+              size="icon"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         ))}
-        <Button
-          onClick={addInterest}
-          variant="outline"
-          className="mt-2 text-sm"
-        >
-          + Ajouter un centre d'intérêt
-        </Button>
+        <Button onClick={handleAddInterest}>Ajouter un centre d'intérêt</Button>
       </div>
     </div>
   );

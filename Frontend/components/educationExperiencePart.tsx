@@ -5,167 +5,172 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useStore } from "@nanostores/react";
+import {
+  $formData,
+  updateEducation,
+  updateExperiences,
+} from "@/store/resumeForm";
+import { Education, Experience } from "@/utils/templatesType";
+import { X } from "lucide-react";
 
 export const EducationExperienceForm = () => {
-  const [formations, setFormations] = useState([{}]);
-  const [experiences, setExperiences] = useState([{}]);
+  const { education, experiences } = useStore($formData);
 
-  const addFormation = () => {
-    setFormations([...formations, {}]);
+  // Fonctions pour l'éducation
+  const handleAddEducation = () => {
+    updateEducation([
+      ...education,
+      { degree: "", institution: "", yearObtained: "" },
+    ]);
   };
 
-  const addExperience = () => {
-    setExperiences([...experiences, {}]);
+  const handleEducationChange = (
+    index: number,
+    field: keyof Education,
+    value: string
+  ) => {
+    const newEducation = education.map((edu, i) =>
+      i === index ? { ...edu, [field]: value } : edu
+    );
+    updateEducation(newEducation);
+  };
+
+  const handleRemoveEducation = (index: number) => {
+    const newEducation = education.filter((_, i) => i !== index);
+    updateEducation(newEducation);
+  };
+
+  // Fonctions pour les expériences
+  const handleAddExperience = () => {
+    updateExperiences([
+      ...experiences,
+      {
+        jobTitle: "",
+        companyName: "",
+        startDate: "",
+        endDate: "",
+        technicalSkills: "",
+      },
+    ]);
+  };
+
+  const handleExperienceChange = (
+    index: number,
+    field: keyof Experience,
+    value: string
+  ) => {
+    const newExperiences = experiences.map((exp, i) =>
+      i === index ? { ...exp, [field]: value } : exp
+    );
+    updateExperiences(newExperiences);
+  };
+
+  const handleRemoveExperience = (index: number) => {
+    const newExperiences = experiences.filter((_, i) => i !== index);
+    updateExperiences(newExperiences);
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow space-y-6">
+    <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold mb-4 pb-2 border-b">Formations</h2>
-        {formations.map((formation, index) => (
-          <div key={index} className="mb-4 space-y-2">
-            <div>
-              <Label
-                htmlFor={`diplome-${index}`}
-                className="text-sm font-normal"
-              >
-                Diplôme obtenu
-              </Label>
+        <h3 className="text-lg font-semibold mb-4">Formation</h3>
+        {education.map((edu, index) => (
+          <div key={index} className="mb-4 p-4 border rounded-lg">
+            <div className="grid grid-cols-2 gap-4 mb-2">
               <Input
-                id={`diplome-${index}`}
-                placeholder="Value"
-                className="mt-1"
+                value={edu.degree}
+                onChange={(e) =>
+                  handleEducationChange(index, "degree", e.target.value)
+                }
+                placeholder="Diplôme obtenu"
+              />
+              <Input
+                value={edu.institution}
+                onChange={(e) =>
+                  handleEducationChange(index, "institution", e.target.value)
+                }
+                placeholder="Établissement"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label
-                  htmlFor={`etablissement-${index}`}
-                  className="text-sm font-normal"
-                >
-                  Établissement
-                </Label>
-                <Input
-                  id={`etablissement-${index}`}
-                  placeholder="Value"
-                  className="mt-1"
-                />
-              </div>
-              <div>
-                <Label
-                  htmlFor={`annee-${index}`}
-                  className="text-sm font-normal"
-                >
-                  Année d'obtention
-                </Label>
-                <Input
-                  id={`annee-${index}`}
-                  placeholder="Value"
-                  className="mt-1"
-                />
-              </div>
+            <div className="flex items-center justify-between">
+              <Input
+                value={edu.yearObtained}
+                onChange={(e) =>
+                  handleEducationChange(index, "yearObtained", e.target.value)
+                }
+                placeholder="Année d'obtention"
+                className="w-1/2"
+              />
+              <Button
+                onClick={() => handleRemoveEducation(index)}
+                variant="ghost"
+                size="icon"
+              >
+                <X className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         ))}
-        <Button
-          onClick={addFormation}
-          variant="outline"
-          className="mt-2 text-sm"
-        >
-          + Ajouter une formation
-        </Button>
+        <Button onClick={handleAddEducation}>Ajouter une formation</Button>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold mb-4 pb-2 border-b">
+        <h3 className="text-lg font-semibold mb-4">
           Expériences professionnelles
-        </h2>
-        {experiences.map((experience, index) => (
-          <div key={index} className="mb-4 space-y-2">
-            <div>
-              <Label htmlFor={`poste-${index}`} className="text-sm font-normal">
-                Titre du poste
-              </Label>
+        </h3>
+        {experiences.map((exp, index) => (
+          <div key={index} className="mb-4 p-4 border rounded-lg">
+            <div className="grid grid-cols-2 gap-4 mb-2">
               <Input
-                id={`poste-${index}`}
-                placeholder="Value"
-                className="mt-1"
+                value={exp.jobTitle}
+                onChange={(e) =>
+                  handleExperienceChange(index, "jobTitle", e.target.value)
+                }
+                placeholder="Titre du poste"
               />
-            </div>
-            <div>
-              <Label
-                htmlFor={`entreprise-${index}`}
-                className="text-sm font-normal"
-              >
-                Nom de l'entreprise
-              </Label>
               <Input
-                id={`entreprise-${index}`}
-                placeholder="Value"
-                className="mt-1"
+                value={exp.companyName}
+                onChange={(e) =>
+                  handleExperienceChange(index, "companyName", e.target.value)
+                }
+                placeholder="Nom de l'entreprise"
+              />
+              <Input
+                value={exp.startDate}
+                onChange={(e) =>
+                  handleExperienceChange(index, "startDate", e.target.value)
+                }
+                placeholder="Date de début"
+              />
+              <Input
+                value={exp.endDate}
+                onChange={(e) =>
+                  handleExperienceChange(index, "endDate", e.target.value)
+                }
+                placeholder="Date de fin"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 items-end">
-              <div>
-                <Label
-                  htmlFor={`debut-${index}`}
-                  className="text-sm font-normal"
-                >
-                  Date de début
-                </Label>
-                <Input
-                  id={`debut-${index}`}
-                  placeholder="Sept 2023"
-                  className="mt-1"
-                />
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="flex-grow">
-                  <Label
-                    htmlFor={`fin-${index}`}
-                    className="text-sm font-normal"
-                  >
-                    Date de fin
-                  </Label>
-                  <Input
-                    id={`fin-${index}`}
-                    placeholder="Dec 2024"
-                    className="mt-1"
-                  />
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id={`en-cours-${index}`} />
-                  <Label
-                    htmlFor={`en-cours-${index}`}
-                    className="text-sm font-normal"
-                  >
-                    En cours
-                  </Label>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Label
-                htmlFor={`competences-${index}`}
-                className="text-sm font-normal"
+            <Textarea
+              value={exp.technicalSkills}
+              onChange={(e) =>
+                handleExperienceChange(index, "technicalSkills", e.target.value)
+              }
+              placeholder="Compétences techniques et professionnelles"
+              className="mb-2"
+            />
+            <div className="flex justify-end">
+              <Button
+                onClick={() => handleRemoveExperience(index)}
+                variant="ghost"
+                size="icon"
               >
-                Liste de compétences techniques et professionnelles
-              </Label>
-              <Textarea
-                id={`competences-${index}`}
-                placeholder="Value"
-                className="mt-1"
-              />
+                <X className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         ))}
-        <Button
-          onClick={addExperience}
-          variant="outline"
-          className="mt-2 text-sm"
-        >
-          + Ajouter un poste
-        </Button>
+        <Button onClick={handleAddExperience}>Ajouter une expérience</Button>
       </div>
     </div>
   );
