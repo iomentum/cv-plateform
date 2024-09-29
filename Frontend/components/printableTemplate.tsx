@@ -1,19 +1,24 @@
 "use client";
 
 import { forwardRef } from "react";
-import CvTemplate from "./cv-template";
+import ModernCV2 from "./resumesTemplates/MRT2";
+import { mockData } from "@/utils/mock";
+import { ColorSchemeName, Props } from "@/utils/templatesType";
 
-interface Props {
-  values: Object;
-  signature: string;
-}
+export type DataType = Props["data"];
 
-const PrintableTemplate = forwardRef<HTMLDivElement, Props>(
-  ({ values, signature }, ref) => {
+type PrintableTemplateProps = {
+  data: DataType;
+  selectedColor: ColorSchemeName;
+};
+
+const PrintableTemplate = forwardRef<HTMLDivElement, PrintableTemplateProps>(
+  ({ data, selectedColor }, ref) => {
+    // TODO: Rendre ce btn dynamique
     return (
       <div className="h-0 overflow-hidden">
-        <div ref={ref} className="w-full">
-          <CvTemplate />
+        <div ref={ref} className="">
+          <ModernCV2 data={data} selectedColor={selectedColor} />
         </div>
       </div>
     );
