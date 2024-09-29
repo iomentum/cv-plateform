@@ -1,5 +1,4 @@
-# produciton
-
+# production
 version: "3"
 services:
   postgres:
@@ -9,8 +8,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    expose:
-      - ${DATABASE_PORT}
+    ports:
+      - "${DATABASE_PORT}:5432"
   server:
     image: jobbi-server
     ports:
@@ -19,9 +18,7 @@ services:
       - NODE_ENV=production
     depends_on:
       - postgres
-      - minio
   client:
     image: jobbi-client
     ports:
       - "3033:80"
- 
