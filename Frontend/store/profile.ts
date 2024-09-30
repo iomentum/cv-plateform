@@ -13,7 +13,6 @@ const initialProfile: Profile = {
   userId: 0,
   user: {
     email: "user@example.com",
-    password: "********",
     name: "Dupont",
     surname: "Jean",
     city: "Paris",

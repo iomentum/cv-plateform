@@ -27,7 +27,6 @@ export const RegisterFormSchema = z.object({
     .string()
     .regex(/^\d{10}$/, "Le numéro de téléphone doit contenir 10 chiffres"),
   domain: z.string().min(1, "Le domaine est requis"),
-  profilePicture: z.instanceof(File).optional(),
 });
 
 export type RegisterFormSchemaValues = z.infer<typeof RegisterFormSchema>;
@@ -40,7 +39,6 @@ export const registerFormDefaultValues: RegisterFormSchemaValues = {
   city: "",
   phoneNumber: "",
   domain: "",
-  profilePicture: undefined,
 };
 export const cvSchema = z.object({
   id: z.string(),

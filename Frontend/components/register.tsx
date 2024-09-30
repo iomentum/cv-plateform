@@ -168,27 +168,6 @@ export const RegisterForm = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="profilePicture"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Photo de profil</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                          field.onChange(
-                            e.target.files ? e.target.files[0] : null
-                          )
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <Button type="submit" className="w-full">
                 S'inscrire
               </Button>
