@@ -14,8 +14,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "@/api/auth";
 import { toast } from "./ui/use-toast";
 import { setAccessToken } from "@/store/acess-token";
+import { useRouter } from "next/navigation";
 
 export const Login = () => {
+  const router = useRouter();
   const form = useForm<LoginFormSchemaValues>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: loginFormDefaultValues,
@@ -24,6 +26,7 @@ export const Login = () => {
   const { mutate } = useMutation(login, {
     onSuccess: (result) => {
       setAccessToken(result.data.accessToken);
+      router.push("/templateSelection");
     },
     onError: () => {
       toast({
