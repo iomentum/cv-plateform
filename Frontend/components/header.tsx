@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
@@ -15,7 +17,7 @@ export const Header = () => {
             <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center cursor-pointer">
-                        <Link href="/home" passHref legacyBehavior>
+                        <Link href="/" passHref legacyBehavior>
                             <Image
                                 src="/logo.svg"
                                 alt="Jobbi Logo"

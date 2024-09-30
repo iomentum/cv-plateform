@@ -1,10 +1,12 @@
 "use client";
 
 import { uploadResume } from "@/api/upload";
-import PersonalInfoForm from "@/components/personalInfoForm";
+import Header from "@/components/header";
+import HomePage from "@/components/home";
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import { useMutation } from "react-query";
+
 export type Upload = {
   selectedFile: File;
   userId: string;
@@ -36,8 +38,9 @@ export default function Home() {
   // };
   return (
     <main>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100 ">
-        <PersonalInfoForm />
+      <Header />
+      <div className="flex justify-center items-center min-h-screen ">
+        <HomePage />
       </div>
     </main>
   );
