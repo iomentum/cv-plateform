@@ -1,9 +1,7 @@
-import { StaticImageData } from "next/image";
 import { ColorScheme } from "./TemplatesColors";
 
 export type PersonalInfo = {
   fullName: string;
-  photo: string | StaticImageData;
   phoneNumber: string;
   email: string;
   postalAddress: string;
