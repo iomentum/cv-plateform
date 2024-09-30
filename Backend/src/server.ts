@@ -40,14 +40,13 @@ const authenticateToken = (
 
 const upload = multer({ dest: "uploads/" });
 
-app.post("/register", upload.single("profilePicture"), userController.register);
+app.post("/register", userController.register);
 app.post("/login", userController.login);
 app.get("/users", authenticateToken, userController.getAllUsers);
 app.get("/users/:id", authenticateToken, userController.getUser);
 app.put(
   "/users/:id",
   authenticateToken,
-  upload.single("profilePicture"),
   userController.updateUser
 );
 app.delete("/users/:id", authenticateToken, userController.deleteUser);

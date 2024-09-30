@@ -12,7 +12,6 @@ exports.userController = {
     register: async (req, res) => {
         try {
             const { email, password, name, surname, city, phoneNumber, domain } = req.body;
-            const profilePicture = req.file ? req.file.path : null;
             if (!email || !password || !name || !surname || !city || !phoneNumber || !domain) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
@@ -25,7 +24,6 @@ exports.userController = {
                     surname,
                     city,
                     phoneNumber,
-                    profilePicture,
                     domain
                 },
             });
@@ -80,7 +78,7 @@ exports.userController = {
             const { id } = req.params;
             const user = await prisma.user.findUnique({
                 where: { id: parseInt(id) },
-                select: { id: true, email: true, name: true },
+                select: { id: true, email: true, name: true, surname: true, city: true, phoneNumber: true, domain: true, description: true },
             });
             if (user) {
                 res.json(user);
@@ -98,7 +96,6 @@ exports.userController = {
         try {
             const { id } = req.params;
             const { email, name, surname, city, phoneNumber, description, domain } = req.body;
-            const profilePicture = req.file ? req.file.path : undefined;
             const updateData = {
                 email,
                 name,
@@ -108,9 +105,6 @@ exports.userController = {
                 description,
                 domain
             };
-            if (profilePicture) {
-                updateData.profilePicture = profilePicture;
-            }
             const user = await prisma.user.update({
                 where: { id: parseInt(id) },
                 data: updateData,
