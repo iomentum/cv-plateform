@@ -83,7 +83,7 @@ export const userController = {
       const { id } = req.params;
       const user = await prisma.user.findUnique({
         where: { id: parseInt(id) },
-        select: { id: true, email: true, name: true },
+        select: { id: true, email: true, name: true, surname: true, city: true, phoneNumber: true, domain: true, profilePicture: true , description: true},
       });
       if (user) {
         res.json(user);
