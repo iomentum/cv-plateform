@@ -16,7 +16,7 @@ export const Header = () => {
         <header className="sticky top-0 left-0 right-0 bg-white border-b shadow-sm">
             <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center cursor-pointer">
+                    <div className="flex items-center  cursor-pointer ">
                         <Link href="/" passHref legacyBehavior>
                             <Image
                                 src="/logo.svg"
@@ -27,7 +27,7 @@ export const Header = () => {
                         </Link>
                     </div>
                     {!hideCreateButton && (
-                        <Link href="/templateSelection" passHref legacyBehavior>
+                        <Link href={token ? "/templateSelection" : "/auth"} passHref legacyBehavior>
                             <Button variant="ghost" className="mx-4">
                                 Créer votre CV
                             </Button>
