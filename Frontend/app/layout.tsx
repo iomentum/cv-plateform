@@ -7,6 +7,7 @@ import { AuthWrapper } from "@/components/authWrapper";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,22 @@ export default function RootLayout({
 }) {
   return (
     <ReactQueryClientProvider>
-      <html lang="en">
-        <body className={inter.className}>
+      <html lang="fr">
+        <body
+          className={cn(
+            inter.className,
+            "min-h-screen relative flex flex-col justify-between"
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <Header/>
+            <Header />
             <AuthWrapper>{children}</AuthWrapper>
-            <Footer/>
+            <Footer />
             <Toaster />
           </ThemeProvider>
         </body>

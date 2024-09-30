@@ -63,7 +63,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
   };
 
   return (
-    <div className="space-y-6">
+    <main className="space-y-6">
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader className="flex flex-col items-center">
           <CardTitle className="mt-4 text-2xl font-bold">
@@ -114,7 +114,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
       </Card>
 
       <CVList cvs={cvList} />
-    </div>
+    </main>
   );
 };
 

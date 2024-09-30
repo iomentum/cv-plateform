@@ -46,7 +46,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-4 p-24">
+    <main className="flex flex-col items-center gap-4 p-24">
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
@@ -101,6 +101,6 @@ export const Login = () => {
           <a href="TKT">Impossible de se connecter ?</a>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };

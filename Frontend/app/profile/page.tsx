@@ -30,10 +30,6 @@ const ProfilePage = () => {
       .catch((error) => console.error("Failed to get user:", error));
   }, [user, userId]);
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-500">
-      <Profile data={user} cvList={cvList} />
-    </main>
-  );
+  return <Profile data={user} cvList={cvList} />;
 };
 export default ProfilePage;
