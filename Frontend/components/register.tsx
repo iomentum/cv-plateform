@@ -1,10 +1,18 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation } from "react-query";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
 import {
   RegisterFormSchema,
   RegisterFormSchemaValues,
@@ -44,10 +52,12 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main className="flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Créer un compte</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Créer un compte
+          </CardTitle>
           <p className="text-sm text-muted-foreground text-center">
             Renseignez vos informations pour vous inscrire
           </p>
@@ -103,7 +113,11 @@ export const RegisterForm = () => {
                   <FormItem>
                     <FormLabel>Mot de passe</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Votre mot de passe" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="Votre mot de passe"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -129,7 +143,10 @@ export const RegisterForm = () => {
                   <FormItem>
                     <FormLabel>Numéro de téléphone</FormLabel>
                     <FormControl>
-                      <Input placeholder="Votre numéro de téléphone" {...field} />
+                      <Input
+                        placeholder="Votre numéro de téléphone"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +159,10 @@ export const RegisterForm = () => {
                   <FormItem>
                     <FormLabel>Domaine</FormLabel>
                     <FormControl>
-                      <Input placeholder="Votre domaine professionnel" {...field} />
+                      <Input
+                        placeholder="Votre domaine professionnel"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -158,25 +178,34 @@ export const RegisterForm = () => {
                       <Input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => field.onChange(e.target.files ? e.target.files[0] : null)}
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.files ? e.target.files[0] : null
+                          )
+                        }
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">S'inscrire</Button>
+              <Button type="submit" className="w-full">
+                S'inscrire
+              </Button>
             </form>
           </Form>
           <p className="mt-4 text-center text-sm text-muted-foreground">
             Déjà un compte ?{" "}
-            <a href="/auth" className="font-medium text-primary hover:underline">
+            <a
+              href="/auth"
+              className="font-medium text-primary hover:underline"
+            >
               Se connecter
             </a>
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };
 

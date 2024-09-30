@@ -1,5 +1,5 @@
-import React from 'react';
-import { ArrowRight, FileText, Search, Share2 } from 'lucide-react';
+import React from "react";
+import { ArrowRight, FileText, Search, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
@@ -9,7 +9,6 @@ const HomePage = () => {
     const token = $accessToken.get();
 
     return (
-        <div className="min-h-screen bg-background">
             <main className="pt-20 sm:pt-24 lg:pt-32"> {/* Ajout de padding-top ici */}
                 <section className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
@@ -61,8 +60,9 @@ const HomePage = () => {
                     </div>
                 </section>
             </main>
-        </div>
-    );
+      </section>
+    </main>
+  );
 };
 
 export default HomePage;
