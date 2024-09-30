@@ -22,6 +22,7 @@ export const PersonalInfoForm: React.FC = () => {
   const formData = useStore($formData);
   const selectedTemplate = useStore($selectedTemplate);
 
+  console.log(selectedTemplate);
   const handlePersonalInfoChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -131,6 +132,7 @@ export const PersonalInfoForm: React.FC = () => {
           values={{
             data: formData,
             selectedColor: selectedTemplate && selectedTemplate.selectedColor,
+            templateId: selectedTemplate?.id ?? 1
           }}
         />
       </div>

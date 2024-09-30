@@ -1,14 +1,14 @@
 "use client";
-import { FileTextIcon } from "lucide-react";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { DataType, PrintableTemplate } from "./printableTemplate";
 import { Button } from "./ui/button";
-import { ColorSchemeName } from "@/utils/templatesType";
+import { ColorSchemeName1, ColorSchemeName2, ColorSchemeName3 } from "@/utils/templatesType";
 
 type FormData = {
   selectedColor: string | null;
   data: DataType;
+  templateId: number; // Ajout de cette ligne
 };
 
 interface RequestEvaluationDocumentButtonProps {
@@ -33,8 +33,9 @@ const PrintButton = ({ values }: RequestEvaluationDocumentButtonProps) => {
     >
       Générer le Cv
       <PrintableTemplate
-        selectedColor={values.selectedColor as ColorSchemeName}
+        selectedColor={values.selectedColor as ColorSchemeName1 | ColorSchemeName2 | ColorSchemeName3}
         data={values.data}
+        templateId={values.templateId} // Utilisation du templateId
         ref={documentRef}
       />
     </Button>

@@ -1,18 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import Image from "next/image";
-import { Props } from "@/utils/templatesType";
-import { ColorScheme } from "@/utils/TemplatesColors";
+import { ModernCV2Props } from "@/utils/templatesType";
+import { ColorScheme2 } from "@/utils/TemplatesColors";
 
-export const ModernCV2 = ({ data, selectedColor }: Props) => {
+export const ModernCV2 = ({ data, selectedColor }: ModernCV2Props) => {
   const { personalInfo, education, experiences, skills, languages, interests } =
     data;
+
+  console.log(selectedColor);
   return (
     <div
-      className={`max-w-6xl mx-auto p-8 bg-gradient-to-br ${ColorScheme[selectedColor]?.bgGradient} shadow-lg rounded-lg font-sans`}
+      className={`max-w-6xl mx-auto p-8 bg-gradient-to-br ${ColorScheme2[selectedColor]?.bgGradient} shadow-lg rounded-lg font-sans`}
     >
       <header
-        className={`mb-8 flex items-center justify-between bg-gradient-to-r ${ColorScheme[selectedColor]?.bgGradient} text-white p-6 rounded-lg`}
+        className={`mb-8 flex items-center justify-between bg-gradient-to-r ${ColorScheme2[selectedColor]?.headerGradient} text-white p-6 rounded-lg`}
       >
         <div className="flex items-center">
           {personalInfo.photo && (
@@ -41,14 +43,14 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
         <div className="w-1/3 bg-white p-6 rounded-lg shadow-md">
           <section className="mb-6">
             <h2
-              className={`text-2xl font-semibold ${ColorScheme[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme[selectedColor]?.bgGradient} pb-2`}
+              className={`text-2xl font-semibold ${ColorScheme2[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme2[selectedColor]?.bgGradient} pb-2`}
             >
               Informations
             </h2>
             <ul className="space-y-2 text-gray-700">
               <li>
                 <span
-                  className={`font-medium ${ColorScheme[selectedColor]?.bgGradient}`}
+                  className={`font-medium ${ColorScheme2[selectedColor]?.bgGradient}`}
                 >
                   Adresse:
                 </span>
@@ -56,7 +58,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
               </li>
               <li>
                 <span
-                  className={`font-medium ${ColorScheme[selectedColor]?.bgGradient}`}
+                  className={`font-medium ${ColorScheme2[selectedColor]?.bgGradient}`}
                 >
                   Date de naissance:
                 </span>
@@ -64,7 +66,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
               </li>
               <li>
                 <span
-                  className={`font-medium ${ColorScheme[selectedColor]?.bgGradient}`}
+                  className={`font-medium ${ColorScheme2[selectedColor]?.bgGradient}`}
                 >
                   Permis:
                 </span>
@@ -72,13 +74,13 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
               </li>
               <li>
                 <span
-                  className={`font-medium ${ColorScheme[selectedColor]?.bgGradient}`}
+                  className={`font-medium ${ColorScheme2[selectedColor]?.bgGradient}`}
                 >
                   LinkedIn:
                 </span>
                 <a
                   href={personalInfo.linkedinUrl}
-                  className={`${ColorScheme[selectedColor]?.bgGradient} hover:underline`}
+                  className={`${ColorScheme2[selectedColor]?.bgGradient} hover:underline`}
                 >
                   {personalInfo.linkedinUrl}
                 </a>
@@ -88,7 +90,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
 
           <section className="mb-6">
             <h2
-              className={`text-2xl font-semibold ${ColorScheme[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme[selectedColor]?.bgGradient} pb-2`}
+              className={`text-2xl font-semibold ${ColorScheme2[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme2[selectedColor]?.bgGradient} pb-2`}
             >
               Compétences
             </h2>
@@ -97,10 +99,10 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
                 <li key={index} className="flex flex-col">
                   <span className="text-gray-700 mb-1">{item.skill}</span>
                   <div
-                    className={`w-full ${ColorScheme[selectedColor]?.bgGradient} rounded-full h-3`}
+                    className={`w-full ${ColorScheme2[selectedColor]?.bgGradient} rounded-full h-3`}
                   >
                     <div
-                      className={`bg-gradient-to-r ${ColorScheme[selectedColor]?.bgGradient} h-3 rounded-full`}
+                      className={`bg-gradient-to-r ${ColorScheme2[selectedColor]?.bgGradient} h-3 rounded-full`}
                       style={{ width: `${item.proficiencyLevel * 20}%` }}
                     ></div>
                   </div>
@@ -111,7 +113,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
 
           <section className="mb-6">
             <h2
-              className={`text-2xl font-semibold ${ColorScheme} mb-4 border-b-2 ${ColorScheme} pb-2`}
+              className={`text-2xl font-semibold ${ColorScheme2} mb-4 border-b-2 ${ColorScheme2} pb-2`}
             >
               Langues
             </h2>
@@ -119,7 +121,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
               {languages.map((item, index) => (
                 <li key={index} className="flex justify-between items-center">
                   <span>{item.language}</span>
-                  <span className={`${ColorScheme} font-medium`}>
+                  <span className={`${ColorScheme2} font-medium`}>
                     {item.proficiencyLevel}
                   </span>
                 </li>
@@ -129,7 +131,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
 
           <section>
             <h2
-              className={`text-2xl font-semibold ${ColorScheme[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme[selectedColor]?.bgGradient} pb-2`}
+              className={`text-2xl font-semibold ${ColorScheme2[selectedColor]?.bgGradient} mb-4 border-b-2 ${ColorScheme2[selectedColor]?.bgGradient} pb-2`}
             >
               Centres d'intérêt
             </h2>
@@ -137,7 +139,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
               {interests.map((item, index) => (
                 <li
                   key={index}
-                  className={`${ColorScheme[selectedColor]?.bgGradient} ${ColorScheme[selectedColor]?.bgGradient} px-3 py-1 rounded-full text-sm`}
+                  className={`${ColorScheme2[selectedColor]?.bgGradient} ${ColorScheme2[selectedColor]?.bgGradient} px-3 py-1 rounded-full text-sm`}
                 >
                   {item}
                 </li>
@@ -150,7 +152,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
         <div className="w-2/3 space-y-6">
           <section className="bg-white p-6 rounded-lg shadow-md">
             <h2
-              className={`text-3xl font-bold ${ColorScheme[selectedColor]?.bgGradient} mb-6 border-b-2 ${ColorScheme[selectedColor]?.bgGradient} pb-2`}
+              className={`text-3xl font-bold ${ColorScheme2[selectedColor]?.bgGradient} mb-6 border-b-2 ${ColorScheme2[selectedColor]?.bgGradient} pb-2`}
             >
               Expériences professionnelles
             </h2>
@@ -159,7 +161,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
                 <h3 className="text-xl font-semibold text-gray-800">
                   {experience.jobTitle}
                 </h3>
-                <p className={`${ColorScheme} font-medium`}>
+                <p className={`${ColorScheme2} font-medium`}>
                   {experience.companyName}
                 </p>
                 <p className="text-gray-600 text-sm mb-2">{`${
@@ -176,7 +178,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
 
           <section className="bg-white p-6 rounded-lg shadow-md">
             <h2
-              className={`text-3xl font-bold ${ColorScheme[selectedColor]?.bgGradient} mb-6 border-b-2 ${ColorScheme[selectedColor]?.bgGradient} pb-2`}
+              className={`text-3xl font-bold ${ColorScheme2[selectedColor]?.bgGradient} mb-6 border-b-2 ${ColorScheme2[selectedColor]?.bgGradient} pb-2`}
             >
               Formation
             </h2>
@@ -185,7 +187,7 @@ export const ModernCV2 = ({ data, selectedColor }: Props) => {
                 <h3 className="text-xl font-semibold text-gray-800">
                   {formation.degree}
                 </h3>
-                <p className={ColorScheme[selectedColor]?.bgGradient}>
+                <p className={ColorScheme2[selectedColor]?.bgGradient}>
                   {formation.institution}
                 </p>
                 <p className="text-gray-600 text-sm">
