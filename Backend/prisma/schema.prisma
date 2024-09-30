@@ -16,7 +16,6 @@ model User {
   surname     String
   city        String
   phoneNumber String
-  profilePicture String?
   description String?
   domain      String
   createdAt   DateTime @default(now())
