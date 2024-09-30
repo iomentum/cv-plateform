@@ -31,7 +31,7 @@ const ProfilePage = () => {
   }, [user, userId]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-500">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Profile data={user} cvList={cvList} />
     </main>
   );

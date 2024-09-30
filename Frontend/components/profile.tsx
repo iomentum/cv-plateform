@@ -88,7 +88,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
                 <strong>Téléphone:</strong> {data.phoneNumber}
               </p>
               <div className="mt-6 flex gap-2">
-                <Button onClick={() => setIsEditing(true)} className="w-full">
+                <Button variant="outline" onClick={() => setIsEditing(true)} className="w-full">
                   Modifier le profil
                 </Button>
                 <Button
@@ -105,7 +105,6 @@ const Profile = ({ data, cvList }: ProfileProps) => {
         <CardFooter>
           <Button
             onClick={handleLogout}
-            variant="destructive"
             className="w-full"
           >
             Déconnexion
