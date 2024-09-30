@@ -1,9 +1,9 @@
 "use client";
 
-import { getMyProfile } from "@/api/user";
+import { getMyProfile, getUserResumes } from "@/api/user";
 import Profile from "@/components/profile";
-import { useEffect } from "react";
 import { profileStore, setUser } from "@/store/profile";
+import { useQuery } from "react-query";
 
 const cvList = [
   {
@@ -24,12 +24,30 @@ const ProfilePage = () => {
   const userId = profileStore.get().userId;
   const user = profileStore.get().user;
 
-  useEffect(() => {
-    getMyProfile(userId)
-      .then((userData) => (setUser(userData.data), console.log(userData)))
-      .catch((error) => console.error("Failed to get user:", error));
-  }, [user, userId]);
+  const {
+    data: resumes,
+    isLoading,
+    isError,
+  } = useQuery(["userResumes", userId], () => getUserResumes(userId), {
+    enabled: !!userId,
+  });
 
-  return <Profile data={user} cvList={cvList} />;
+  const {
+    data: userData,
+    isLoading: isLoad,
+    isError: isErr,
+    error,
+  } = useQuery(["userProfile", userId], () => getMyProfile(userId), {
+    enabled: !!userId,
+    onSuccess: (data) => {
+      setUser(data.data);
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error("Failed to get user:", error);
+    },
+  });
+
+  return <Profile data={userData?.data} cvList={resumes?.data} />;
 };
 export default ProfilePage;

@@ -16,8 +16,6 @@ const HomePage = () => {
 
   return (
     <main className="pt-20 sm:pt-24 lg:pt-32">
-      {" "}
-      {/* Ajout de padding-top ici */}
       <section className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-4xl font-extrabold text-foreground sm:text-5xl sm:tracking-tight lg:text-6xl">

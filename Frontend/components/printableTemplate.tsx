@@ -2,7 +2,6 @@
 
 import { forwardRef } from "react";
 import ModernCV2 from "./resumesTemplates/MRT2";
-import { mockData } from "@/utils/mock";
 import { ColorSchemeName, Props } from "@/utils/templatesType";
 
 export type DataType = Props["data"];

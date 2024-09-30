@@ -21,8 +21,8 @@ import { logout } from "@/store/acess-token";
 import ProfileForm from "./profileForm";
 
 interface ProfileProps {
-  data: User;
-  cvList: CV[];
+  data: User | undefined;
+  cvList: CV[] | undefined;
 }
 
 const Profile = ({ data, cvList }: ProfileProps) => {
@@ -62,6 +62,8 @@ const Profile = ({ data, cvList }: ProfileProps) => {
     mutate(profile.user);
   };
 
+  if (!data) return null;
+
   return (
     <main className="space-y-6">
       <Card className="w-full max-w-2xl mx-auto">
@@ -88,7 +90,11 @@ const Profile = ({ data, cvList }: ProfileProps) => {
                 <strong>Téléphone:</strong> {data.phoneNumber}
               </p>
               <div className="mt-6 flex gap-2">
-                <Button variant="outline" onClick={() => setIsEditing(true)} className="w-full">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsEditing(true)}
+                  className="w-full"
+                >
                   Modifier le profil
                 </Button>
                 <Button
@@ -103,10 +109,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
           )}
         </CardContent>
         <CardFooter>
-          <Button
-            onClick={handleLogout}
-            className="w-full"
-          >
+          <Button onClick={handleLogout} className="w-full">
             Déconnexion
           </Button>
         </CardFooter>
