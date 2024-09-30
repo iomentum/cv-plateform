@@ -13,12 +13,19 @@ export const loginFormDefaultValues: LoginFormSchemaValues = {
 };
 
 export const RegisterFormSchema = z.object({
-  email: z.string().email("Adresse email invalide").min(1, "L'email est requis"),
-  password: z.string().min(8, "Le mot de passe doit contenir au moins 8 caractères"),
+  email: z
+    .string()
+    .email("Adresse email invalide")
+    .min(1, "L'email est requis"),
+  password: z
+    .string()
+    .min(8, "Le mot de passe doit contenir au moins 8 caractères"),
   name: z.string().min(1, "Le nom est requis"),
   surname: z.string().min(1, "Le prénom est requis"),
   city: z.string().min(1, "La ville est requise"),
-  phoneNumber: z.string().regex(/^\d{10}$/, "Le numéro de téléphone doit contenir 10 chiffres"),
+  phoneNumber: z
+    .string()
+    .regex(/^\d{10}$/, "Le numéro de téléphone doit contenir 10 chiffres"),
   domain: z.string().min(1, "Le domaine est requis"),
   profilePicture: z.instanceof(File).optional(),
 });
@@ -35,3 +42,23 @@ export const registerFormDefaultValues: RegisterFormSchemaValues = {
   domain: "",
   profilePicture: undefined,
 };
+export const cvSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  createdAt: z.string(),
+  link: z.string().url(),
+});
+
+export const updateProfileFormSchema = z.object({
+  email: z.string(),
+  name: z.string(),
+  surname: z.string(),
+  password: z.string(),
+  city: z.string(),
+  phoneNumber: z.string(),
+  domain: z.string(),
+});
+
+export type UpdateProfileFormSchemaValues = z.infer<
+  typeof updateProfileFormSchema
+>;
