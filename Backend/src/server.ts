@@ -64,5 +64,7 @@ app.post(
 app.get("/resumes/:id", resumeController.downloadResume);
 app.delete("/resumes/:id", authenticateToken, resumeController.deleteResume);
 
+app.post("/generate-resume/:templateId", resumeController.generateResumeResume);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
