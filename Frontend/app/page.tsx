@@ -1,8 +1,7 @@
 "use client";
 
 import { uploadResume } from "@/api/upload";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
+
 import HomePage from "@/components/home";
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
@@ -39,11 +38,9 @@ export default function Home() {
   // };
   return (
     <main>
-      <Header />
       <div className="flex justify-center items-center min-h-screen ">
         <HomePage />
       </div>
-      <Footer />
     </main>
   );
 }
