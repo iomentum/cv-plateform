@@ -26,7 +26,7 @@ export const Login = () => {
   const { mutate } = useMutation(login, {
     onSuccess: (result) => {
       setAccessToken(result.data.accessToken);
-      router.push("/templateSelection");
+      router.push("/");
     },
     onError: () => {
       toast({

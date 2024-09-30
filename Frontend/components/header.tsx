@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { $accessToken } from '@/store/acess-token';
+import { $accessToken, logout } from '@/store/acess-token';
 
 export const Header = () => {
     const token = $accessToken.get();
@@ -40,7 +40,9 @@ export const Header = () => {
                                 <Link href="/profile" passHref legacyBehavior>
                                     <Button variant="outline">Profil</Button>
                                 </Link>
-                                <Button>Déconnexion</Button>
+                                <Link href="/" passHref legacyBehavior>
+                                    <Button onClick={logout}>Déconnexion</Button>
+                                </Link>
                             </>
                         ) : (
                             <>
