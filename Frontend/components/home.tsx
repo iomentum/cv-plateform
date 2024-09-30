@@ -3,8 +3,11 @@ import { ArrowRight, FileText, Search, Share2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
+import { $accessToken } from '@/store/acess-token';
 
 const HomePage = () => {
+    const token = $accessToken.get();
+
     return (
         <div className="min-h-screen bg-background">
             <main className="pt-20 sm:pt-24 lg:pt-32"> {/* Ajout de padding-top ici */}
@@ -17,7 +20,7 @@ const HomePage = () => {
                             Créez, partagez et suivez vos CVs en toute simplicité avec Jobbi.
                         </p>
                         <div className="mt-8 flex justify-center">
-                            <Link href="/templateSelection">
+                            <Link href={token ? "/templateSelection" : "/auth"}>
                                 <Button size="lg">
                                     Commencer gratuitement
                                     <ArrowRight className="ml-2 h-5 w-5" />
