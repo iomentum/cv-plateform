@@ -1,3 +1,6 @@
+import { GenerateResumeFormSchema } from "@/components/personalInfoForm";
+import axiosClient from "@/utils/axios";
+import { ColorSchemeName } from "@/utils/templatesType";
 import axios from "axios";
 
 interface UploadData {
@@ -34,5 +37,16 @@ export const uploadResume = async (data: UploadData) => {
 interface UploadResponse {
   // Définissez ici la structure de la réponse de votre API
   message: string;
-  fileUrl?: string;
+  resumeId?: number;
 }
+
+type GenerateResumeFn = {
+  data: Omit<GenerateResumeFormSchema, "interests"> & { interests: string[] };
+  selectedColor: ColorSchemeName;
+  templateId: number;
+};
+
+export const generateResume = (data: GenerateResumeFn) =>
+  axiosClient().post("/generate-resume/1", data, {
+    responseType: "blob",
+  });

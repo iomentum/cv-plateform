@@ -1,3 +1,5 @@
+"use client";
+
 import PersonalInfoForm from "@/components/personalInfoForm";
 
 export default function Register() {
