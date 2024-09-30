@@ -1,34 +1,29 @@
-"use client";
-
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   updateProfileFormSchema,
   UpdateProfileFormSchemaValues,
 } from "@/utils/schema/form";
-import { setUser, toggleIsEditing } from "@/store/profile";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "./ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { useForm } from "react-hook-form";
+import { Input } from "./ui/input";
 import { User } from "@/utils/schema/types";
+import { setUser, toggleIsEditing } from "@/store/profile";
 
-type UserFormProps = {
-  initialData: any;
+type ProfileFormProps = {
+  profile: User;
 };
-
-const UserForm = ({ initialData }: UserFormProps) => {
+const ProfileForm = ({ profile }: ProfileFormProps) => {
   const form = useForm<UpdateProfileFormSchemaValues>({
     resolver: zodResolver(updateProfileFormSchema),
-    defaultValues: initialData,
+    defaultValues: profile,
   });
 
   const onSubmit = (data: UpdateProfileFormSchemaValues) => {
@@ -37,7 +32,7 @@ const UserForm = ({ initialData }: UserFormProps) => {
       email: data.email,
       name: data.name,
       surname: data.surname,
-      password: data.password,
+      //   password: data.password,
       city: data.city,
       phoneNumber: data.phoneNumber,
       domain: data.domain,
@@ -133,4 +128,4 @@ const UserForm = ({ initialData }: UserFormProps) => {
   );
 };
 
-export default UserForm;
+export default ProfileForm;

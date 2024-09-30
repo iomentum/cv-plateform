@@ -23,11 +23,12 @@ const cvList = [
 const ProfilePage = () => {
   const userId = profileStore.get().userId;
   const user = profileStore.get().user;
+
   useEffect(() => {
     getMyProfile(userId)
-      .then((userData) => (setUser(userData as any), console.log(userData)))
+      .then((userData) => (setUser(userData.data), console.log(userData)))
       .catch((error) => console.error("Failed to get user:", error));
-  }, []);
+  }, [user, userId]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-500">

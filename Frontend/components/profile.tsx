@@ -11,7 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import CVList from "./cvList";
-import UserForm from "./userForm";
 import { CV, User } from "@/utils/schema/types";
 import { profileStore, setIsEditing } from "@/store/profile";
 import { useStore } from "@nanostores/react";
@@ -19,6 +18,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateMyProfile } from "@/api/user";
 import { toast } from "./ui/use-toast";
 import { logout } from "@/store/acess-token";
+import ProfileForm from "./profileForm";
 
 interface ProfileProps {
   data: User;
@@ -72,7 +72,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
         </CardHeader>
         <CardContent>
           {profile.isEditing ? (
-            <UserForm initialData={data} />
+            <ProfileForm profile={data} />
           ) : (
             <div className="space-y-4">
               <p>

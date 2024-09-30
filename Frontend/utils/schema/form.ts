@@ -53,7 +53,6 @@ export const updateProfileFormSchema = z.object({
   email: z.string(),
   name: z.string(),
   surname: z.string(),
-  password: z.string(),
   city: z.string(),
   phoneNumber: z.string(),
   domain: z.string(),

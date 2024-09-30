@@ -7,7 +7,6 @@ export interface CV {
 
 export type User = {
   email: string;
-  password: string;
   name: string;
   surname: string;
   city: string;

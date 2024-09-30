@@ -1,6 +1,5 @@
 import axiosClient from "@/utils/axios";
 import { User } from "@/utils/schema/types";
-import axios from "axios";
 
 // Get user profile
 export const getMyProfile = (userId: number) =>
