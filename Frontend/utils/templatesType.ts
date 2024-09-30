@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { ColorScheme } from "./TemplatesColors";
+import { ColorScheme1, ColorScheme2, ColorScheme3,  } from "./TemplatesColors";
 
 export type PersonalInfo = {
   fullName: string;
@@ -35,9 +35,11 @@ export type Language = {
   language: string;
   proficiencyLevel: string;
 };
-export type ColorSchemeName = keyof typeof ColorScheme;
+export type ColorSchemeName1 = keyof typeof ColorScheme1;
+export type ColorSchemeName2 = keyof typeof ColorScheme2;
+export type ColorSchemeName3 = keyof typeof ColorScheme3;
 
-export type Props = {
+export type ModernCV1Props = {
   data: {
     personalInfo: PersonalInfo;
     education: Education[];
@@ -47,20 +49,28 @@ export type Props = {
     interests: string[];
   };
 
-  selectedColor: ColorSchemeName;
+  selectedColor: ColorSchemeName1 ;
 };
 
-type ColorScheme = {
-  bgGradient: string;
-  headerGradient: string;
-  accentText: string;
-  accentBorder: string;
-  progressBg: string;
-  progressFill: string;
-  tagBg: string;
-  tagText: string;
+export type ModernCV2Props = {
+  data: {
+    personalInfo: PersonalInfo;
+    education: Education[];
+    experiences: Experience[];
+    skills: Skill[];
+    languages: Language[];
+    interests: string[];
+  };
+  selectedColor: ColorSchemeName2;
 };
-
-export type ColorSchemes = {
-  [K in ColorSchemeName]: ColorScheme;
+export type ModernCV3Props = {
+  data: {
+    personalInfo: PersonalInfo;
+    education: Education[];
+    experiences: Experience[];
+    skills: Skill[];
+    languages: Language[];
+    interests: string[];
+  };
+  selectedColor: ColorSchemeName3;
 };
