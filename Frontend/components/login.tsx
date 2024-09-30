@@ -16,6 +16,7 @@ import { toast } from "./ui/use-toast";
 import { setAccessToken } from "@/store/acess-token";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { setUserId } from "@/store/profile";
 
 export const Login = () => {
   const router = useRouter();
@@ -27,6 +28,7 @@ export const Login = () => {
   const { mutate } = useMutation(login, {
     onSuccess: (result) => {
       setAccessToken(result.data.accessToken);
+      setUserId(result.data.userId);
       router.push("/");
     },
     onError: () => {
@@ -47,7 +49,9 @@ export const Login = () => {
     <div className="flex min-h-screen flex-col items-center gap-4 p-24">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Se connecter</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Se connecter
+          </CardTitle>
           <p className="text-sm text-muted-foreground text-center">
             Renseignez vos informations afin de vous connecter
           </p>
