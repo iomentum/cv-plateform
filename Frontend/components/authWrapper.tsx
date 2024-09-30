@@ -38,7 +38,7 @@ export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isMounted) {
-      const isPrivateRoute = ["/", "/profile", "/templateSelection"].includes(
+      const isPrivateRoute = ["/profile", "/templateSelection", "/form"].includes(
         window.location.pathname
       );
 

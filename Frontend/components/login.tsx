@@ -45,7 +45,7 @@ export const Login = () => {
   return (
     <div className="flex min-h-screen flex-col items-center gap-4 p-24">
       <h1 className="text-white">Se connecter</h1>
-      <p className="text-gray-200">
+      <p className="text-black">
         Renseigner vos information afin de vous connecter
       </p>
       <Form {...form}>

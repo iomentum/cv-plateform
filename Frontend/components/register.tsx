@@ -17,7 +17,7 @@ import { setAccessToken } from "@/store/acess-token";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const Register = () => {
+export const RegisterForm = () => {
   const router = useRouter();
   const form = useForm<RegisterFormSchemaValues>({
     resolver: zodResolver(RegisterFormSchema),
@@ -44,7 +44,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Créer un compte</CardTitle>
@@ -155,8 +155,8 @@ export const Register = () => {
                   <FormItem>
                     <FormLabel>Photo de profil</FormLabel>
                     <FormControl>
-                      <Input 
-                        type="file" 
+                      <Input
+                        type="file"
                         accept="image/*"
                         onChange={(e) => field.onChange(e.target.files ? e.target.files[0] : null)}
                       />
@@ -180,4 +180,4 @@ export const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;

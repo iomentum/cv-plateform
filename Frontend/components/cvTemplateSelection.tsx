@@ -29,7 +29,7 @@ export const CVTemplateShowcase = () => {
   const handleSelection = () => {
     if (selectedTemplate?.id) {
       console.log(`Template ${selectedTemplate.id} sélectionné`);
-      router.push("/");
+      router.push("/form");
     } else {
       alert("Veuillez sélectionner un template");
     }
