@@ -115,7 +115,7 @@ const Profile = ({ data, cvList }: ProfileProps) => {
         </CardFooter>
       </Card>
 
-      <CVList cvs={cvList} />
+      {/* <CVList cvs={cvList} /> */}
     </main>
   );
 };
