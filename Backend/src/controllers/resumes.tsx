@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import { PrismaClient, Prisma } from "@prisma/client";
 import fs from "fs/promises";
 import Template1 from "../templates-react/template1";
+import Template2 from "../templates-react/template2";
+
 import { renderToStream } from "@react-pdf/renderer";
 
 const prisma = new PrismaClient();
@@ -160,7 +162,7 @@ export const resumeController = {
       }
 
       const stream = await renderToStream(
-        <Template1
+        <Template2
           data={body.data}
           selectedColor={body.selectedColor}
           templateId={Number(templateId)}
