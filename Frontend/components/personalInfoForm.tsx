@@ -19,6 +19,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const zodSchema = z.object({
   personalInfo: z.object({
@@ -73,6 +74,7 @@ const zodSchema = z.object({
 export type GenerateResumeFormSchema = z.infer<typeof zodSchema>;
 
 export const PersonalInfoForm: React.FC = () => {
+  const router = useRouter();
   const form = useForm<GenerateResumeFormSchema>({
     resolver: zodResolver(zodSchema),
   });
@@ -92,14 +94,15 @@ export const PersonalInfoForm: React.FC = () => {
   });
 
   const handleSubmit = (formData: GenerateResumeFormSchema) => {
-    mutate({
-      data: {
-        ...formData,
-        interests: formData.interests.map((obj) => obj.interest),
-      },
-      selectedColor: "purple-rose", // FIXME: unmock
-      templateId: 1, // FIXME: unmock
-    });
+    // mutate({
+    //   data: {
+    //     ...formData,
+    //     interests: formData.interests.map((obj) => obj.interest),
+    //   },
+    //   selectedColor: "purple-rose", // FIXME: unmock
+    //   templateId: 1, // FIXME: unmock
+    // });
+    router.push("/generatedCV");
   };
 
   console.error(form.formState.errors);
@@ -129,11 +132,11 @@ export const PersonalInfoForm: React.FC = () => {
               )}
             />
 
-            <div>
-              {/* TODO: Plug les photos */}
-              <Label htmlFor="photo">Photo</Label>
+            {/* <div> */}
+            {/* TODO: Plug les photos */}
+            {/* <Label htmlFor="photo">Photo</Label>
               <Input id="photo" accept="image/*" />
-            </div>
+            </div> */}
 
             <FormField
               control={form.control}

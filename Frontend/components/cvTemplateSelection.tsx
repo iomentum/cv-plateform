@@ -30,29 +30,29 @@ import { useStore } from "@nanostores/react";
 export const CVTemplateShowcase = () => {
   const router = useRouter();
   const selectedTemplate = useStore($selectedTemplate);
-  const templatesModern1 = [
-    { id: 1, selectedColor: "grayScale", image: grayScale },
-    { id: 2, selectedColor: "blueShades", image: blueShades },
-    { id: 3, selectedColor: "earthTones", image: earthTones },
-    { id: 4, selectedColor: "mintFresh", image: mintFresh },
-    { id: 5, selectedColor: "purpleHaze", image: purpleHaze },
-    { id: 6, selectedColor: "sunsetOrange", image: sunsetOrange },
-    { id: 7, selectedColor: "oceanBreeze", image: oceanBreeze },
-    { id: 8, selectedColor: "roseGold", image: roseGold },
-  ]
+  // const templatesModern1 = [
+  //   { id: 1, selectedColor: "grayScale", image: grayScale },
+  //   { id: 2, selectedColor: "blueShades", image: blueShades },
+  //   { id: 3, selectedColor: "earthTones", image: earthTones },
+  //   { id: 4, selectedColor: "mintFresh", image: mintFresh },
+  //   { id: 5, selectedColor: "purpleHaze", image: purpleHaze },
+  //   { id: 6, selectedColor: "sunsetOrange", image: sunsetOrange },
+  //   { id: 7, selectedColor: "oceanBreeze", image: oceanBreeze },
+  //   { id: 8, selectedColor: "roseGold", image: roseGold },
+  // ];
   const templatesModern2 = [
-    { id: 9, selectedColor: "purple-rose", image: purpleRose },
-    { id: 10, selectedColor: "blue-teal", image: blueTeal },
-    { id: 11, selectedColor: "orange-yellow", image: orangeYellow },
-    { id: 12, selectedColor: "green-lime", image: greenLime },
+    { id: 1, selectedColor: "purple-rose", image: purpleRose },
+    { id: 2, selectedColor: "blue-teal", image: blueTeal },
+    { id: 3, selectedColor: "orange-yellow", image: orangeYellow },
+    { id: 4, selectedColor: "green-lime", image: greenLime },
   ];
 
-  const templatesModern3 = [
-    { id: 13, selectedColor: "greenGold", image: greenGold },
-    { id: 14, selectedColor: "navyBlue", image: navyBlue },
-    { id: 15, selectedColor: "burgundy", image: burgundy },
-    { id: 16, selectedColor: "charcoal", image: charcoal },
-  ];
+  // const templatesModern3 = [
+  //   { id: 13, selectedColor: "greenGold", image: greenGold },
+  //   { id: 14, selectedColor: "navyBlue", image: navyBlue },
+  //   { id: 15, selectedColor: "burgundy", image: burgundy },
+  //   { id: 16, selectedColor: "charcoal", image: charcoal },
+  // ];
 
   const handleCardClick = (template: SelectedTemplate) => {
     setSelectedTemplate(template);
@@ -61,7 +61,7 @@ export const CVTemplateShowcase = () => {
   const handleSelection = () => {
     if (selectedTemplate?.id) {
       console.log(`Template ${selectedTemplate.id} sélectionné`);
-      router.push("/");
+      router.push("/form");
     } else {
       alert("Veuillez sélectionner un template");
     }
@@ -69,7 +69,7 @@ export const CVTemplateShowcase = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-8">
-      <h2 className="text-2xl font-bold mb-6 text-black">
+      {/* <h2 className="text-2xl font-bold mb-6 text-black">
         Modernes et minimalistes
       </h2>
       <div className="flex flex-col items-center">
@@ -98,7 +98,7 @@ export const CVTemplateShowcase = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <h2 className="text-2xl font-bold mb-6 text-black">
         Colorés et créatifs
       </h2>
@@ -110,10 +110,11 @@ export const CVTemplateShowcase = () => {
               className={`
               bg-white rounded-lg overflow-hidden shadow-md 
               transition-all duration-300 cursor-pointer
-              ${selectedTemplate?.id === template.id
+              ${
+                selectedTemplate?.id === template.id
                   ? "ring-4 ring-blue-500 shadow-xl scale-105"
                   : "hover:shadow-xl hover:scale-102"
-                }
+              }
             `}
               onClick={() => handleCardClick(template)}
             >
@@ -129,7 +130,7 @@ export const CVTemplateShowcase = () => {
           ))}
         </div>
       </div>
-      <h2 className="text-2xl font-bold mb-6 text-black">
+      {/* <h2 className="text-2xl font-bold mb-6 text-black">
         Professionnels et élégants
       </h2>
       <div className="flex flex-col items-center">
@@ -158,7 +159,7 @@ export const CVTemplateShowcase = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <Button
         onClick={handleSelection}
         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1"
