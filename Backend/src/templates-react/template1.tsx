@@ -41,7 +41,7 @@ export interface Education {
 type ColorSchemeName = "blue" | "green" | "red" | "purple" | "orange";
 
 // Define the Props type as requested
-type Props = {
+export type Props = {
   data: {
     personalInfo: PersonalInfo;
     education: Education[];
